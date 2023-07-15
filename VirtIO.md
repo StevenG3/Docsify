@@ -97,7 +97,7 @@ vring_used 结构体用来描述已用的 desc ，"已用"表示后端已经完�
 
 vring 结构体的内存布局：
 
-![avatar](images/vring_layout.png "Vring空间结构布局")
+![avatar](images/vring-layout.png "Vring空间结构布局")
 
 几个对于理解 Vring 工作原理的重要的 Q & A：
 
