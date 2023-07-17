@@ -35,14 +35,15 @@ ip netns exec ns2 ifconfig # 在ns2中执行ifconfig命令
 ## iperf
 ### 常用选项
 ```shell
--s 
--D
--c
--i
--t
--P
+-s # 创建服务器端
+-D # 作为后台进程
+-c # 作为客户端
+-i # 设置每多少秒统计一次
+-t # 设置总计时长
+-P # 设置同时工作的线程数
+-u # 默认使用TCP发包，该选项可以变更为UDP发包
+-b # 设置UDP模式的带宽，配合-u选项使用
 ```
-
 
 # 文本处理
 ## grep

@@ -11,4 +11,6 @@
 	* [Markdown](/summary/Markdown.md "Markdown")
 * CSBasics
 	* [ComputerNetwork](/csnotes/ComputerNetwork.md "ComputerNetwork")
+* Daily
+	* [DailyNotes](/diary/202307.md "202307")
 * [ToDo](/ToDo.md "ToDo")

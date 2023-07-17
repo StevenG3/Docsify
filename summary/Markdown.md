@@ -23,3 +23,14 @@
 | Ctrl-a | 回到行首 | 超级有用 |
 | Ctrl-e | 回到行尾 |  |
 ```
+
+# 链接
+```markdown
+[name](link)
+
+<link>
+```
+
+[NUMA影响程序延迟](https://draveness.me/whys-the-design-numa-performance/)
+
+<https://draveness.me/whys-the-design-numa-performance/>
