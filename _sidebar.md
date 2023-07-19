@@ -4,11 +4,13 @@
 * Virtualization
 	* [VirtIO](/virtualization/VirtIO.md "VirtIO")
 	* [VirtIOSpec](/virtualization/VirtIOSpec.md "VirtIOSpec")
+	* [VirtIOSource](/virtualization/VirtIOSource.md "VirtIOSource")
 * Summary
-	* [HotKey](/summary/ShellHotKey.md "ShellHotKey")
+	* [ShellHotKey](/summary/ShellHotKey.md "ShellHotKey")
 	* [LinuxCmd](/summary/LinuxCmd.md "LinuxCmd")
 	* [Summary](/summary/Summary.md "Summary")
 	* [Markdown](/summary/Markdown.md "Markdown")
+	* [VSCodeHotKey](/summary/VSCodeHotKey.md "VSCodeHotKey")
 * CSBasics
 	* [ComputerNetwork](/csnotes/ComputerNetwork.md "ComputerNetwork")
 * Daily

@@ -52,3 +52,44 @@ vim /etc/netplan/00-installer-config.yaml # Debain/Ubuntu
 ## 推荐阅读
 [NUMA影响程序延迟](https://draveness.me/whys-the-design-numa-performance/)
 
+# 网卡名称长度限制
+使用ifconfig配置网卡名时，需要注意长度不能超过13字节，原因是内核中针对网络接口名做了长度限制
+```c
+// include/linux/socket.h
+struct scokaddr {
+    sa_family_t sa_family; /* address family, AF_xxx */
+    char sa_data[14]; /* 14 bytes of protocol address */
+};
+```
+超过13字节的部分将被截断
+
+# 网卡工作模式
+## 分类
+网卡有以下几种工作模式：
+1. **广播模式（Broadcast）**：物理地址为0xffffff的广播帧，工作在广播模式的网卡接收广播帧，它将会接收所有目的地址为广播地址的数据包，一般网卡都会设置为这个模式
+2. **多播模式（Multicast）**：多播传送地址作为目的物理地址的帧可以被组内的其他主机同时接收，而组外主机却接收不到。但是，如果将网卡设置为多播传送模式，它可以接收所有的多播传送帧，而不论是不是组内成员。当数据包为目的地址为多播地址，而且网卡地址是属于那个多播地址所代表的多播组时，网卡将接收此数据包，即使一个网卡并不是一个多播组的成员，程序也可以将网卡设置为多播模式而接收那些多播数据包。（**1.设置为多播传送模式的网卡可以接收所有多播传送帧；2.即使没有设置成多播传送模式，但是网卡地址属于某个多播组，也能收到该多播组的数据包**）
+3. **直接模式（Direct）**：只接收目的地址是自己MAC地址的帧。只有当数据包的目的地址为网卡自己的地址时，网卡才接收它
+4. **混杂模式（Promiscuous）**：工作在混杂模式的网卡接收所有的流过网卡的帧，抓包程序运行在这种模式下。网卡的缺省工作模式包含广播模式和直接模式。如果采用混杂模式，网卡将接收同一网络内所发送的数据包，达到对于网络信息监视捕获的目的。
+
+## 配置
+```bash
+ifconfig eth0
+# => 观察flags的状态
+# eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+
+# 开启混杂模式
+ifconfig eth0 promisc
+
+# 取消混杂模式
+ifconfig eth0 -promisc
+```
+
+## 参考
+[理解网卡混杂模式](https://zdyxry.github.io/2020/03/18/%E7%90%86%E8%A7%A3%E7%BD%91%E5%8D%A1%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F/)
+
+
+# Netfilter框架
+## 参考
+[走进Linux内核之Netfilter框架](https://juejin.cn/post/7008945265021288484)
+
+[连接跟踪（conntrack）](https://arthurchiao.art/blog/conntrack-design-and-implementation-zh/)

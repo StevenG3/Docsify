@@ -34,3 +34,23 @@
 [NUMA影响程序延迟](https://draveness.me/whys-the-design-numa-performance/)
 
 <https://draveness.me/whys-the-design-numa-performance/>
+
+# 引用
+## 样式
+```markdown
+> 这是一个引用
+```
+
+> 这是一个引用
+
+如果需要在引用块中分段，则应该在分段空行前加上`>`
+
+```markdown
+> 这是段落一
+>
+> 这是段落二
+```
+
+> 这是段落一
+>
+> 这是段落二

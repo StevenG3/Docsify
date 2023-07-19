@@ -1,6 +1,6 @@
 # VirtIO
 
-# 背景
+# 产生背景
 虚拟化技术是云计算的一项基础技术，它可以支持在物理设备上运行多个虚拟化节点。这些节点存在于虚拟化环境中，但通过虚拟化技术，要达到一种效果，即要让它们运行起来的表现与在物理环境中的独立节点相似。这就要求虚拟环境和客户机为虚拟设备提供一个简单、高效、标准的可扩展机制，这种机制就是 VirtIO 。 
 
 ## 全虚拟化
@@ -36,7 +36,7 @@ VirtIO 加持下的半虚拟化场景中的 I/O 的交互流程如下：
 
 以上过程中提到的**适当的时机**，取决于 VirtIO Driver 和 Device 之间的协商。默认情况下，设置为每次有 I/O 请求就会触发通知机制，这样会导致频繁的 VM Exit 和 VM Entry，降低交互效率。VirtIO 提供标志位设置通知触发的条件，当 Vring 中存放的数据达到一个水线，可以触发通知机制，以降低前述场景带来的性能损耗。
 
-# 组成
+# 基本组件
 VirtIO 由三部分组成：Driver、Vring 和 Device，三者关系如上图所示。Driver 被称为 VirtIO 的前端，其以 GuestOS 中的内核驱动形式呈现；Device 被称为 VirtIO 的后端，处于 HostOS 的内核中；前后端的数据交互通过 Vring 实现，结构类似于环形队列。下面就基于 Linux 3.10 版本对 VirtIO 的实现进行简要分析。
 
 ## VirtIO Driver
@@ -115,3 +115,5 @@ Q: buff 回收的过程是怎样的？
 
 当需要填充的数据填充完成后，会将 desc chain 的最后一个 desc 的 flags 置为 ~VRING_DESC_F_NEXT，表示没有下一个 desc 。在 buff 回收过程中，检测到 ~VRING_DESC_F_NEXT ，表示是需要回收的 desc chain 中的最后一个 desc 。此时，将该 desc 的 next 指向 free_head ，同时把 free_head 指向该 desc chain 的头部，完成 desc 的回收。
 
+# 设备类型
+## 网络设备
